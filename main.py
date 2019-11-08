@@ -1,5 +1,6 @@
 from bottle import run, get, request, post
 import csv
+import requests
 
 
 tabTempAir = []
@@ -27,7 +28,10 @@ def getAll():
     global TempWater
     global TempAir
  
-    time = 61*60
+    timeJson = requests.get('https://closingtime.szyszki.de/api/time') #61*60
+    time = timeJson.json()['symSec']   #1
+    #print(timeJson.json()['symSec'])
+
     
     timeInd = int((time/60)/5)
     print(timeInd)
@@ -35,9 +39,9 @@ def getAll():
     TempWater = float(tabTempWater[timeInd])
     TempAir = float(tabTempAir[timeInd])
     
-    mpec = [{'WaterTemp' : TempWater,},
-        {'AirTemp' : TempAir,},
-        {'WaterPress' : PressWater}]
+    mpec = [{'WaterTemp' : str(TempWater),},
+        {'AirTemp' : str(TempAir),},
+        {'WaterPress' : str(PressWater)}]
     
     return{'mpec':mpec}
 
