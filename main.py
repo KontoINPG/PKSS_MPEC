@@ -28,11 +28,13 @@ def getAll():
     global TempWater
     global TempAir
  
-    timeJson = requests.get('https://closingtime.szyszki.de/api/time') #61*60
-    time = timeJson.json()['symSec']   #1
+    #timeJson = requests.get('https://closingtime.szyszki.de/api/time') #61*60
+    time = 1#timeJson.json()['symSec']   #1
     #print(timeJson.json()['symSec'])
 
-    
+    #timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
+    timestamp = "1:10:11"#timestampJson.json()['symTime']   #1
+
     timeInd = int((time/60)/5)
     print(timeInd)
 
@@ -42,6 +44,15 @@ def getAll():
     mpec = [{'WaterTemp' : str(TempWater),},
         {'AirTemp' : str(TempAir),},
         {'WaterPress' : str(PressWater)}]
+
+
+    response = requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
+    "status": "run",
+    "warm_water_stream_Fzm": str(PressWater),
+    "incoming_water_temp_Tzm": str(TempWater),
+    "failure": "False",
+    "outside_temp_To": str(TempAir),
+    "timestamp": timestamp} )
     
     return{'mpec':mpec}
 
