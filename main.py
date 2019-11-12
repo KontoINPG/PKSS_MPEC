@@ -32,9 +32,10 @@ def getAll():
     time = timeJson.json()['symSec']   #1
     #print(timeJson.json()['symSec'])
 
-    #timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
-    #timestamp = "1"#timestampJson.json()['symTime']   #1
-
+    timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
+    timestamp = timestampJson.json()['symTime']   #1
+    print(timestamp)
+    
     timeInd = int((time/60)/5)
     print(timeInd)
 
