@@ -47,7 +47,7 @@ def getAll():
 
 
     response = requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
-    "status": "run",
+    "status": "Run",
     "warm_water_stream_Fzm": str(PressWater),
     "incoming_water_temp_Tzm": str(TempWater),
     "failure": "False",
