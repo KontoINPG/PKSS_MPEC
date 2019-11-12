@@ -60,7 +60,7 @@ def getAll():
 @post('/mpec/setPressure')
 def setPressure():
     global PressWater
-    PressWater = request.json.get('PressWater')
+    PressWater = float(request.json.get('PressWater'))
     print(PressWater)
 
 run(host='0.0.0.0', port=8080, debug=True)
