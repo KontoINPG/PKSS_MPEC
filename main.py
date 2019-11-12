@@ -28,12 +28,12 @@ def getAll():
     global TempWater
     global TempAir
  
-    #timeJson = requests.get('https://closingtime.szyszki.de/api/time') #61*60
-    time = 1#timeJson.json()['symSec']   #1
+    timeJson = requests.get('https://closingtime.szyszki.de/api/time') #61*60
+    time = timeJson.json()['symSec']   #1
     #print(timeJson.json()['symSec'])
 
-    #timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
-    timestamp = "1:10:11"#timestampJson.json()['symTime']   #1
+    timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
+    timestamp = timestampJson.json()['symTime']   #1
 
     timeInd = int((time/60)/5)
     print(timeInd)
@@ -62,4 +62,4 @@ def setPressure():
     PressWater = request.json.get('PressWater')
     print(PressWater)
 
-run(host='0.0.0.0', port=8080, debug=True)
+run(host='localhost', port=8081, debug=True)
