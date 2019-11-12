@@ -32,8 +32,8 @@ def getAll():
     time = timeJson.json()['symSec']   #1
     #print(timeJson.json()['symSec'])
 
-    timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
-    timestamp = timestampJson.json()['symTime']   #1
+    #timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
+    #timestamp = "1"#timestampJson.json()['symTime']   #1
 
     timeInd = int((time/60)/5)
     print(timeInd)
@@ -46,13 +46,13 @@ def getAll():
         {'WaterPress' : str(PressWater)}]
 
 
-    response = requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
-    "status": "Run",
-    "warm_water_stream_Fzm": str(PressWater),
-    "incoming_water_temp_Tzm": str(TempWater),
-    "failure": "False",
-    "outside_temp_To": str(TempAir),
-    "timestamp": timestamp} )
+    #response = requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
+    #"status": "Run",
+    #"warm_water_stream_Fzm": str(PressWater),
+    #"incoming_water_temp_Tzm": str(TempWater),
+    #"failure": "False",
+    #"outside_temp_To": str(TempAir),
+    #"timestamp": timestamp} )
     
     return{'mpec':mpec}
 
