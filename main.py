@@ -47,13 +47,13 @@ def getAll():
         {'WaterPress' : str(PressWater)}]
 
 
-    #response = requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
-    #"status": "Run",
-    #"warm_water_stream_Fzm": str(PressWater),
-    #"incoming_water_temp_Tzm": str(TempWater),
-    #"failure": "False",
-    #"outside_temp_To": str(TempAir),
-    #"timestamp": timestamp} )
+    response = requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
+    "status": "Run",
+    "warm_water_stream_Fzm": str(PressWater),
+    "incoming_water_temp_Tzm": str(TempWater),
+    "failure": "False",
+    "outside_temp_To": str(TempAir),
+    "timestamp": timestamp} )
     
     return{'mpec':mpec}
 
