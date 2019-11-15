@@ -34,7 +34,7 @@ def getAll():
 
     timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
     timestamp = timestampJson.json()['symTime']   #1
-    print(timestamp)
+    #print(timestamp)
     
     timeInd = int((time/60)/5)
     print(timeInd)
@@ -42,21 +42,26 @@ def getAll():
     TempWater = float(tabTempWater[timeInd])
     TempAir = float(tabTempAir[timeInd])
     
-    mpec = [{'WaterTemp' : str(TempWater),},
-        {'AirTemp' : str(TempAir),},
-        {'WaterPress' : str(PressWater)}]
+    #mpec = {'WaterTemp' : str(TempWater),
+     #   'AirTemp' : str(TempAir),
+      #  'WaterPress' : str(PressWater)}
 
 
-    response = requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
-    "status": "Run",
-    "warm_water_stream_Fzm": str(PressWater),
-    "incoming_water_temp_Tzm": str(TempWater),
-    "failure": "False",
-    "outside_temp_To": str(TempAir),
-    "timestamp": timestamp} )
+    try:
+        response = requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
+        "status": "Run",
+        "warm_water_stream_Fzm": str(PressWater),
+        "incoming_water_temp_Tzm": str(TempWater),
+        "failure": "False",
+        "outside_temp_To": str(TempAir),
+        "timestamp": timestamp} )
+    except:
+        print("Dominiki baza nie działa :) ")
     
-    return{'mpec':mpec}
-
+    return{'WaterTemp' : str(TempWater),
+        'AirTemp' : str(TempAir),
+        'WaterPress' : str(PressWater)}
+    
 @post('/mpec/setPressure')
 def setPressure():
     global PressWater
@@ -64,3 +69,5 @@ def setPressure():
     print(PressWater)
 
 run(host='0.0.0.0', port=8080, debug=True)
+#run(host='localhost', port=8081, debug=True)
+
