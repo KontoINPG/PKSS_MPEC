@@ -57,6 +57,17 @@ def getAll():
         "timestamp": timestamp} )
     except:
         print("Dominiki baza nie działa :) ")
+
+    try:
+        response = requests.post('https://layanotherlogonthefire/szyszki.de/provider/log', json={
+        "status": "Run",
+        "warm_water_stream_Fzm": str(PressWater),
+        "incoming_water_temp_Tzm": str(TempWater),
+        "failure": "False",
+        "outside_temp_To": str(TempAir),
+        "timestamp": timestamp} )
+    except:
+        print("Mateusza baza nie działa :) ")
     
     return{'WaterTemp' : str(TempWater),
         'AirTemp' : str(TempAir),
