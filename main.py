@@ -56,7 +56,7 @@ def getAll():
         "outside_temp_To": str(TempAir),
         "timestamp": timestamp} )
     except:
-        print("Dominiki baza nie działa :) ")
+        print("Dominiki baza nie działa :)")
 
     try:
         response = requests.post('https://layanotherlogonthefire/szyszki.de/provider/log', json={
