@@ -48,7 +48,7 @@ def getAll():
 
 
     try:
-        response = requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
+        requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
         "status": "Run",
         "warm_water_stream_Fzm": str(PressWater),
         "incoming_water_temp_Tzm": str(TempWater),
@@ -59,7 +59,7 @@ def getAll():
         print("Dominiki baza nie działa :)")
 
     try:
-        response = requests.post('https://layanotherlogonthefire/szyszki.de/provider/log', json={
+        requests.post('https://layanotherlogonthefire/szyszki.de/provider/log', json={
         "status": "Run",
         "warm_water_stream_Fzm": str(PressWater),
         "incoming_water_temp_Tzm": str(TempWater),
