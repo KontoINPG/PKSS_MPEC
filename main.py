@@ -20,13 +20,14 @@ with open('Temperatura.csv', newline='') as csvfile:
 TempWater = 70
 TempAir = 6
 PressWater = 1.0
-
+oldTimestamp = "1"
 
 
 @get('/mpec/data')
 def getAll():
     global TempWater
     global TempAir
+    global oldTimestamp
  
     timeJson = requests.get('https://closingtime.szyszki.de/api/time') #61*60
     time = timeJson.json()['symSec']   #1
@@ -34,6 +35,7 @@ def getAll():
 
     timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
     timestamp = timestampJson.json()['symTime']   #1
+    if timestamp == oldTimestamp
     #print(timestamp)
     
     timeInd = int((time/60)/5)
@@ -47,27 +49,30 @@ def getAll():
       #  'WaterPress' : str(PressWater)}
 
 
-    try:
-        requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
-        "status": "Run",
-        "warm_water_stream_Fzm": str(PressWater),
-        "incoming_water_temp_Tzm": str(TempWater),
-        "failure": "False",
-        "outside_temp_To": str(TempAir),
-        "timestamp": timestamp} )
-    except:
-        print("Dominiki baza nie działa :)")
+    if timestamp != oldTimestamp:
+        try:
+            requests.post('https://anoldlogcabinforsale.szyszki.de/provider/log', json={
+            "status": "Run",
+            "warm_water_stream_Fzm": str(PressWater),
+            "incoming_water_temp_Tzm": str(TempWater),
+            "failure": "False",
+            "outside_temp_To": str(TempAir),
+            "timestamp": timestamp} )
+        except:
+            print("Dominiki baza nie działa :)")
 
-    try:
-        requests.post('https://layanotherlogonthefire.szyszki.de/provider/log', json={
-        "status": "Run",
-        "warm_water_stream_Fzm": str(PressWater),
-        "incoming_water_temp_Tzm": str(TempWater),
-        "failure": "False",
-        "outside_temp_To": str(TempAir),
-        "timestamp": timestamp} )
-    except:
-        print("Mateusza baza nie działa :) ")
+        try:
+            requests.post('https://layanotherlogonthefire.szyszki.de/provider/log', json={
+            "status": "Run",
+            "warm_water_stream_Fzm": str(PressWater),
+            "incoming_water_temp_Tzm": str(TempWater),
+            "failure": "False",
+            "outside_temp_To": str(TempAir),
+            "timestamp": timestamp} )
+        except:
+            print("Mateusza baza nie działa :) ")
+            
+    oldTimestamp = timestamp
     
     return{'WaterTemp' : str(TempWater),
         'AirTemp' : str(TempAir),
