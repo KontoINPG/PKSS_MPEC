@@ -35,7 +35,6 @@ def getAll():
 
     timestampJson = requests.get('https://closingtime.szyszki.de/api/prettytime')
     timestamp = timestampJson.json()['symTime']   #1
-    if timestamp == oldTimestamp
     #print(timestamp)
     
     timeInd = int((time/60)/5)
